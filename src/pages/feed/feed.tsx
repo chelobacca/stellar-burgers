@@ -11,5 +11,7 @@ export const Feed: FC = () => {
     return <Preloader />;
   }
 
+  /** TODO: Добавить return? см. начало QA */
+  // return
   <FeedUI orders={orders} handleGetFeeds={() => {}} />;
 };
