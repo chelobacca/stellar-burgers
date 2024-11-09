@@ -1,8 +1,13 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export const Profile: FC = () => {
   /** TODO: взять переменную из стора */
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const user = {
     name: '',
     email: ''

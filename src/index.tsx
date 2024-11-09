@@ -17,3 +17,7 @@ root.render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+//получаем состояние хранилища при загрузке приложения
+const currentState = store.getState();
+console.log(currentState);

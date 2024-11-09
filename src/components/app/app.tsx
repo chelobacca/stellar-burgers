@@ -14,7 +14,7 @@ import styles from './app.module.css';
 import { AppHeader, IngredientDetails, OrderInfo } from '@components';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch } from 'src/services/store';
-// import { ProtectedRoute } from '../ProtectedRoute';
+import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 
 const App = () => {
   const location = useLocation();
@@ -28,38 +28,19 @@ const App = () => {
         <Route path='/' element={<ConstructorPage />} />
         <Route path='/feed' element={<Feed />} />
         <Route path='*' element={<NotFound404 />} />
-        <Route
-          path='/login'
-          element={
-            // <ProtectedRoute>
-            <Login />
-            // </ProtectedRoute>
-          }
-        />
+        <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
+        <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
+
         <Route
           path='/register'
-          element={
-            // <ProtectedRoute>
-            <Register />
-            // </ProtectedRoute>
-          }
+          element={<OnlyUnAuth component={<Register />} />}
         />
+
         <Route
           path='/forgot-password'
-          element={
-            // <ProtectedRoute>
-            <ForgotPassword />
-            // </ProtectedRoute>
-          }
+          element={<OnlyUnAuth component={<ForgotPassword />} />}
         />
-        <Route
-          path='/profile'
-          element={
-            // <ProtectedRoute>
-            <Profile />
-            // </ProtectedRoute>
-          }
-        />
+
         <Route
           path='/profile/orders'
           element={
@@ -68,6 +49,7 @@ const App = () => {
             // </ProtectedRoute>
           }
         />
+
         <Route path='/feed/:number' element={<OrderInfo />} />
         <Route path='/ingredients/:id' element={<IngredientDetails />} />
         <Route
