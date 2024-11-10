@@ -13,13 +13,26 @@ import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, OrderInfo } from '@components';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { useDispatch } from 'src/services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route';
+import { useEffect } from 'react';
+import {
+  fetchIngredients,
+  getIngredients
+} from '../../services/slices/burgerAppSlice';
 
 const App = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const state = location.state; // Получаем состояние из location
   const backgroundLocation = location.state?.background;
+  const ingredients = useSelector(getIngredients);
+
+  useEffect(() => {
+    if (!ingredients.length) {
+      dispatch(fetchIngredients());
+    }
+  }, []);
 
   return (
     <div className={styles.app}>
@@ -30,35 +43,23 @@ const App = () => {
         <Route path='*' element={<NotFound404 />} />
         <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
         <Route path='/profile' element={<OnlyAuth component={<Profile />} />} />
-
+        <Route path='/feed/:number' element={<OrderInfo />} />
+        <Route path='/ingredients/:id' element={<IngredientDetails />} />
         <Route
           path='/register'
           element={<OnlyUnAuth component={<Register />} />}
         />
-
         <Route
           path='/forgot-password'
           element={<OnlyUnAuth component={<ForgotPassword />} />}
         />
-
         <Route
           path='/profile/orders'
-          element={
-            // <ProtectedRoute>
-            <ProfileOrders />
-            // </ProtectedRoute>
-          }
+          element={<OnlyAuth component={<ProfileOrders />} />}
         />
-
-        <Route path='/feed/:number' element={<OrderInfo />} />
-        <Route path='/ingredients/:id' element={<IngredientDetails />} />
         <Route
           path='/profile/orders/:number'
-          element={
-            // <ProtectedRoute>
-            <OrderInfo />
-            // </ProtectedRoute>
-          }
+          element={<OnlyAuth component={<OrderInfo />} />}
         />
       </Routes>
     </div>
