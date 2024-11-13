@@ -18,10 +18,10 @@ export const Feed: FC = () => {
     dispatch(fetchFeed());
   }, [dispatch]);
 
-  /** TODO: прелоудер */
-  // if (!feed.orders.length) {
-  //   return <Preloader />;
-  // }
+  /** TODO: переделать прелоудер */
+  if (!feed.orders.length) {
+    return <Preloader />;
+  }
 
   const handleGetFeeds = () => {
     dispatch(fetchFeed());

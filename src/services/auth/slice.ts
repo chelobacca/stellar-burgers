@@ -12,8 +12,6 @@ export const initialState: TUserState = {
   isAuthChecked: false
 };
 
-//type ConstrIngre = Ingredient & { key: string};
-
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -21,14 +19,6 @@ export const authSlice = createSlice({
     setIsAuthChecked: (state, action: PayloadAction<boolean>) => {
       state.isAuthChecked = action.payload;
     }
-    // addIngredient: {
-    //     reducer: (state, action) => {
-    //         state.ingredients.push(action.payload);
-    //     },
-    //     prepare: (ingredient) => {
-    //         return { payload: {...ingredient, key: nanoid()}}
-    //     }
-    // }
   },
   selectors: {
     getIsAuthChecked: (state) => state.isAuthChecked,

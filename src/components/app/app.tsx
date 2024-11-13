@@ -11,14 +11,16 @@ import {
 import '../../index.css';
 import styles from './app.module.css';
 
-import { AppHeader, IngredientDetails, OrderInfo } from '@components';
+import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/store';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 import { useEffect } from 'react';
 import {
+  closeModal,
   fetchIngredients,
-  getIngredients
+  getIngredients,
+  modalSelector
 } from '../../services/slices/burgerAppSlice';
 
 const App = () => {
@@ -27,12 +29,17 @@ const App = () => {
   const state = location.state; // Получаем состояние из location
   const backgroundLocation = location.state?.background;
   const ingredients = useSelector(getIngredients);
+  const isModalOpened = useSelector(modalSelector);
 
   useEffect(() => {
     if (!ingredients.length) {
       dispatch(fetchIngredients());
     }
   }, []);
+
+  const handleClose = () => {
+    dispatch(closeModal());
+  };
 
   return (
     <div className={styles.app}>
@@ -62,6 +69,20 @@ const App = () => {
           element={<OnlyAuth component={<OrderInfo />} />}
         />
       </Routes>
+
+      {/* МОДАЛЬНЫЕ ОКНА */}
+      {isModalOpened && backgroundLocation && (
+        <Routes>
+          <Route
+            path='/ingredients/:id'
+            element={
+              <Modal title={'Описание ингредиента'} onClose={handleClose}>
+                <IngredientDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
     </div>
   );
 };

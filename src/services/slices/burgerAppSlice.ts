@@ -16,9 +16,6 @@ type TInitialState = {
   orderModalData: TOrder | null;
   orderRequest: boolean;
   user: TUser;
-  // orders: TOrder[]; ///
-  // totalOrders: number; ///
-  // ordersToday: number; ///
   userOrders: TOrder[] | null;
   isAuthChecked: boolean;
   isInit: boolean;
@@ -55,6 +52,17 @@ export const initialState: TInitialState = {
   }
 };
 
+//type TConstructorIngredient = TIngredient & { key: string};
+
+// addIngredient: {
+//     reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
+//         state.ingredients.push(action.payload);
+//     },
+//     prepare: (ingredient: TIngredient) => {
+//         return { payload: {...ingredient, key: nanoid()}}
+//     }
+// }
+
 export const burgerApp = createSlice({
   name: 'burgerApp',
   initialState,
@@ -71,12 +79,19 @@ export const burgerApp = createSlice({
         const id = uuidv4();
         return { payload: { ...ingredient, id } };
       }
+    },
+    openModal(state) {
+      state.isModalOpened = true;
+    },
+    closeModal(state) {
+      state.isModalOpened = false;
     }
   },
   selectors: {
     selectLoading: (state) => state.loading,
     getIngredients: (state) => state.ingredients,
     getFeedSelector: (state) => state.feed,
+    modalSelector: (state) => state.isModalOpened,
     selectConstructorItems: (state) => state.constructorItems,
     selectOrderRequest: (state) => state.orderRequest,
     selectOrderModalData: (state) => state.orderModalData
@@ -121,7 +136,7 @@ export const burgerApp = createSlice({
   }
 });
 
-//САНКИ
+//THUNKS
 export const fetchIngredients = createAsyncThunk(
   'ingredients/getAll',
   async () => getIngredientsApi()
@@ -140,11 +155,12 @@ export const {
   selectLoading,
   getIngredients,
   getFeedSelector,
+  modalSelector,
   selectConstructorItems,
   selectOrderRequest,
   selectOrderModalData
 } = burgerApp.selectors;
 
-export const { addIngredient } = burgerApp.actions;
+export const { addIngredient, openModal, closeModal } = burgerApp.actions;
 
 export default burgerApp.reducer;
