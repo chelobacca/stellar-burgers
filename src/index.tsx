@@ -4,11 +4,6 @@ import App from './components/app/app';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider, useDispatch } from 'react-redux';
 import store, { useSelector } from './services/store';
-import {
-  fetchFeed,
-  fetchIngredients,
-  getIngredients
-} from './services/slices/burgerAppSlice';
 
 const container = document.getElementById('root') as HTMLElement;
 const root = ReactDOMClient.createRoot(container!);

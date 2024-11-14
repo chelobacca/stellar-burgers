@@ -12,7 +12,7 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/store';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 import { useEffect } from 'react';
@@ -26,6 +26,7 @@ import {
 const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const state = location.state; // Получаем состояние из location
   const backgroundLocation = location.state?.background;
   const ingredients = useSelector(getIngredients);
@@ -39,6 +40,7 @@ const App = () => {
 
   const handleClose = () => {
     dispatch(closeModal());
+    navigate(-1);
   };
 
   return (
@@ -78,6 +80,14 @@ const App = () => {
             element={
               <Modal title={'Описание ингредиента'} onClose={handleClose}>
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path='/feed/:number'
+            element={
+              <Modal title={'Заказ'} onClose={handleClose}>
+                <OrderInfo />
               </Modal>
             }
           />

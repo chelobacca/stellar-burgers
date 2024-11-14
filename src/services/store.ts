@@ -16,6 +16,11 @@ const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production'
 });
 
+// получаем состояние хранилища при любых изменениях
+store.subscribe(() => {
+  console.log('Current state:', store.getState());
+});
+
 export type RootState = ReturnType<typeof rootReducer>;
 
 export type AppDispatch = typeof store.dispatch;

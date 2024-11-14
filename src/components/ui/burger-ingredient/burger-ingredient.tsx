@@ -19,9 +19,6 @@ export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
 
     const onClick = () => {
       dispatch(openModal());
-      console.log(_id);
-      const currentState = store.getState();
-      console.log(currentState);
     };
 
     return (
