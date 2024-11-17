@@ -16,9 +16,9 @@ const Protected = ({
   const user = useSelector(getUser);
   const location = useLocation();
 
-  //   if (!isAuthChecked) {
-  //     return <p>Загрузка...</p>;
-  //   }
+  // if (!isAuthChecked) {
+  //   return <p>Загрузка...</p>;
+  // }
 
   if (!onlyUnAuth && !user) {
     // Маршрут для авторизованного и не авторизован

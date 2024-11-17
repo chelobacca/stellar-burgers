@@ -1,23 +1,46 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import { api } from '../../utils/api';
 import { setIsAuthChecked } from './slice';
+import {
+  getUserApi,
+  loginUserApi,
+  logoutApi,
+  registerUserApi,
+  TLoginData,
+  TRegisterData
+} from '@api';
 
-export const login = createAsyncThunk('auth/login', async () => api.login());
+export const login = createAsyncThunk<TUser, TLoginData>(
+  'auth/login',
+  async (data, { rejectWithValue }) => {
+    const response = await loginUserApi(data);
 
-export const logout = createAsyncThunk('auth/logout', async () => api.logout());
+    if (!response?.success) {
+      return rejectWithValue(response);
+    }
 
-export const setUser = createAction<TUser | null, 'auth/setUser'>(
-  'auth/setUser'
+    const { user, refreshToken, accessToken } = response;
+    localStorage.setItem('accessToken', accessToken);
+    localStorage.setItem('refreshToken', refreshToken);
+    return user;
+  }
 );
+
+export const logout = createAsyncThunk('auth/logout', async () => logoutApi());
+
+export const register = createAsyncThunk(
+  'auth/register',
+  async (data: TRegisterData) => registerUserApi(data)
+);
+
+export const setUser = createAction<TUser, 'auth/setUser'>('auth/setUser'); ///
 
 export const checkUserAuth = createAsyncThunk(
   'auth/checkUserAuth',
   async (_, { dispatch }) => {
     if (localStorage.getItem('accessToken')) {
-      api
-        .getUser()
-        .then((user) => dispatch(setUser(user)))
+      getUserApi()
+        .then((res) => dispatch(setUser(res.user)))
         .finally(() => dispatch(setIsAuthChecked(true)));
     } else {
       dispatch(setIsAuthChecked(true));

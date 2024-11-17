@@ -38,14 +38,14 @@ export type TOrdersData = {
   totalToday: number;
 };
 
-// export type TUser = {
-//   email: string;
-//   name: string;
-// };
-
 export type TUser = {
   email: string;
   name: string;
-} | null;
+};
+
+// export type TUser = {
+//   email: string;
+//   name: string;
+// } | null;
 
 export type TTabMode = 'bun' | 'sauce' | 'main';

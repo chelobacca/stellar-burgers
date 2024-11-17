@@ -15,9 +15,9 @@ type TInitialState = {
   ingredients: TIngredient[];
   orderModalData: TOrder | null;
   orderRequest: boolean;
-  user: TUser;
+  // user: TUser;
   userOrders: TOrder[] | null;
-  isAuthChecked: boolean;
+  // isAuthChecked: boolean;
   isInit: boolean;
   isModalOpened: boolean;
   errorText: string;
@@ -30,12 +30,12 @@ export const initialState: TInitialState = {
   ingredients: [],
   orderModalData: null,
   orderRequest: false,
-  user: {
-    name: '',
-    email: ''
-  },
+  // user: {
+  //   name: '',
+  //   email: ''
+  // },
   userOrders: null,
-  isAuthChecked: false,
+  // isAuthChecked: false,
   isInit: false,
   isModalOpened: false,
   errorText: '',
@@ -85,6 +85,15 @@ export const burgerApp = createSlice({
     },
     closeModal(state) {
       state.isModalOpened = false;
+    },
+    clearOrderModalData(state) {
+      state.orderModalData = null;
+      state.constructorItems = {
+        bun: {
+          price: 0
+        },
+        ingredients: []
+      };
     }
   },
   selectors: {
@@ -93,7 +102,7 @@ export const burgerApp = createSlice({
     getFeedSelector: (state) => state.feed,
     modalSelector: (state) => state.isModalOpened,
     selectConstructorItems: (state) => state.constructorItems,
-    selectOrderRequest: (state) => state.orderRequest,
+    orderRequestSelector: (state) => state.orderRequest,
     selectOrderModalData: (state) => state.orderModalData
   },
   extraReducers: (builder) => {
@@ -110,14 +119,14 @@ export const burgerApp = createSlice({
         state.loading = false;
       })
 
-      //получить заказ
-      .addCase(fetchNewOrder.pending, (state) => {
+      //разместить заказ
+      .addCase(postNewOrder.pending, (state) => {
         state.orderRequest = true;
       })
-      .addCase(fetchNewOrder.rejected, (state, action) => {
+      .addCase(postNewOrder.rejected, (state, action) => {
         state.orderRequest = false;
       })
-      .addCase(fetchNewOrder.fulfilled, (state, action) => {
+      .addCase(postNewOrder.fulfilled, (state, action) => {
         state.orderModalData = action.payload.order;
         state.orderRequest = false;
       })
@@ -142,13 +151,13 @@ export const fetchIngredients = createAsyncThunk(
   async () => getIngredientsApi()
 );
 
-export const fetchNewOrder = createAsyncThunk(
-  'orders/newOrder',
-  async (data: string[]) => orderBurgerApi(data)
-);
-
 export const fetchFeed = createAsyncThunk<TOrdersData>('feed/fetch', async () =>
   getFeedsApi()
+);
+
+export const postNewOrder = createAsyncThunk(
+  'orders/newOrder',
+  async (data: string[]) => orderBurgerApi(data)
 );
 
 export const {
@@ -157,10 +166,11 @@ export const {
   getFeedSelector,
   modalSelector,
   selectConstructorItems,
-  selectOrderRequest,
+  orderRequestSelector,
   selectOrderModalData
 } = burgerApp.selectors;
 
-export const { addIngredient, openModal, closeModal } = burgerApp.actions;
+export const { addIngredient, openModal, closeModal, clearOrderModalData } =
+  burgerApp.actions;
 
 export default burgerApp.reducer;

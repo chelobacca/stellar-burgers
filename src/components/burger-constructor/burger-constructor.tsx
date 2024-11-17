@@ -5,7 +5,9 @@ import { useSelector } from 'react-redux';
 import {
   selectConstructorItems,
   selectOrderModalData,
-  selectOrderRequest
+  orderRequestSelector,
+  postNewOrder,
+  clearOrderModalData
 } from '../../services/slices/burgerAppSlice';
 import { useDispatch } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
@@ -17,17 +19,29 @@ export const BurgerConstructor: FC = () => {
 
   const constructorItems = useSelector(selectConstructorItems);
   const isAuthChecked = useSelector(getIsAuthChecked);
-  const orderRequest = useSelector(selectOrderRequest);
+  const orderRequest = useSelector(orderRequestSelector);
   const orderModalData = useSelector(selectOrderModalData);
 
+  // оформть заказ
   const onOrderClick = () => {
     if (!isAuthChecked) {
       return navigate('/login', { replace: true });
     }
-
+    const { bun, ingredients } = constructorItems;
     if (!constructorItems.bun || orderRequest) return;
+
+    const orderData: string[] = [
+      bun?._id!,
+      ...ingredients.map((ingredient) => ingredient._id),
+      bun?._id!
+    ];
+
+    dispatch(postNewOrder(orderData));
   };
-  const closeOrderModal = () => {};
+
+  const closeOrderModal = () => {
+    dispatch(clearOrderModalData());
+  };
 
   const price = useMemo(
     () =>
