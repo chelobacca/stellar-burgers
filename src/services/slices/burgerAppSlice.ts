@@ -1,4 +1,9 @@
-import { getFeedsApi, getIngredientsApi, orderBurgerApi } from '@api';
+import {
+  getFeedsApi,
+  getIngredientsApi,
+  getOrdersApi,
+  orderBurgerApi
+} from '@api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   TConstructorIngredient,
@@ -17,7 +22,6 @@ type TInitialState = {
   orderRequest: boolean;
   // user: TUser;
   userOrders: TOrder[] | null;
-  // isAuthChecked: boolean;
   isInit: boolean;
   isModalOpened: boolean;
   errorText: string;
@@ -35,7 +39,6 @@ export const initialState: TInitialState = {
   //   email: ''
   // },
   userOrders: null,
-  // isAuthChecked: false,
   isInit: false,
   isModalOpened: false,
   errorText: '',
@@ -103,7 +106,8 @@ export const burgerApp = createSlice({
     modalSelector: (state) => state.isModalOpened,
     selectConstructorItems: (state) => state.constructorItems,
     orderRequestSelector: (state) => state.orderRequest,
-    selectOrderModalData: (state) => state.orderModalData
+    selectOrderModalData: (state) => state.orderModalData,
+    getUserOrders: (state) => state.userOrders
   },
   extraReducers: (builder) => {
     builder
@@ -141,6 +145,18 @@ export const burgerApp = createSlice({
       .addCase(fetchFeed.fulfilled, (state, action) => {
         state.loading = false;
         state.feed = action.payload;
+      })
+
+      //получить заказы пользователя
+      .addCase(fetchUserOrders.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchUserOrders.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(fetchUserOrders.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userOrders = action.payload;
       });
   }
 });
@@ -160,6 +176,10 @@ export const postNewOrder = createAsyncThunk(
   async (data: string[]) => orderBurgerApi(data)
 );
 
+export const fetchUserOrders = createAsyncThunk('user/orders', async () =>
+  getOrdersApi()
+);
+
 export const {
   selectLoading,
   getIngredients,
@@ -167,7 +187,8 @@ export const {
   modalSelector,
   selectConstructorItems,
   orderRequestSelector,
-  selectOrderModalData
+  selectOrderModalData,
+  getUserOrders
 } = burgerApp.selectors;
 
 export const { addIngredient, openModal, closeModal, clearOrderModalData } =

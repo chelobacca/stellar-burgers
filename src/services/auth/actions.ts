@@ -9,6 +9,7 @@ import {
   TLoginData,
   TRegisterData
 } from '@api';
+import { setCookie } from '../../utils/cookie';
 
 export const login = createAsyncThunk<TUser, TLoginData>(
   'auth/login',
@@ -20,7 +21,7 @@ export const login = createAsyncThunk<TUser, TLoginData>(
     }
 
     const { user, refreshToken, accessToken } = response;
-    localStorage.setItem('accessToken', accessToken);
+    setCookie('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
     return user;
   }
