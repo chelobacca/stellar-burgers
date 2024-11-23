@@ -5,13 +5,14 @@ import { TIngredient } from '@utils-types';
 import { useSelector } from '../../services/store';
 import {
   getFeedSelector,
-  getIngredients
+  getIngredients,
+  getUserOrders
 } from '../../services/slices/burgerAppSlice';
 import { redirect, useParams } from 'react-router-dom';
+/** TODO: взять переменные orderData и ingredients из стора */
+// TODO: брать заказ по номеру?
 
 export const OrderInfo: FC = () => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-
   const params = useParams<{ number: string }>();
   if (!params.number) {
     redirect('/feed');

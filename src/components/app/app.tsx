@@ -6,7 +6,8 @@ import {
   NotFound404,
   Profile,
   ProfileOrders,
-  Register
+  Register,
+  ResetPassword
 } from '@pages';
 import '../../index.css';
 import styles from './app.module.css';
@@ -63,6 +64,10 @@ const App = () => {
           element={<OnlyUnAuth component={<ForgotPassword />} />}
         />
         <Route
+          path='/reset-password'
+          element={<OnlyUnAuth component={<ResetPassword />} />}
+        />
+        <Route
           path='/profile/orders'
           element={<OnlyAuth component={<ProfileOrders />} />}
         />
@@ -78,13 +83,21 @@ const App = () => {
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title={'Описание ингредиента'} onClose={handleClose}>
+              <Modal title={'Детали ингредиента'} onClose={handleClose}>
                 <IngredientDetails />
               </Modal>
             }
           />
           <Route
             path='/feed/:number'
+            element={
+              <Modal title={'Заказ'} onClose={handleClose}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
+          <Route
+            path='/profile/orders/:number'
             element={
               <Modal title={'Заказ'} onClose={handleClose}>
                 <OrderInfo />
@@ -98,3 +111,23 @@ const App = () => {
 };
 
 export default App;
+
+// При нажатии кнопки «Сохранить» на странице профиля пользователя
+// отправляется соответствующий запрос к API,
+// который содержит изменённые данные.
+
+// Экран «Лента заказов» Обновляется в режиме реального времени,
+// когда авторизованный пользователь создаёт заказ. Содержит подсчёт стоимости каждого заказа, исходя из стоимости его ингредиентов.
+
+// Экран «История заказов» Обновляется в режиме реального времени
+// и отображает статусы заказов.
+
+// Содержит подсчёт стоимости каждого заказа, исходя из стоимости его ингредиентов.
+// Статусы «Отменён», «Готовится» и «Выполнен» формируются в зависимости от значения поля status каждого заказа.
+
+// При клике по заказу открывается модальное окно с информацией о заказе и происходит переход
+// на маршрут /feed/:id или /profile/orders/:id — в зависимости от того, на какой странице пользователь кликнул по заказу. При прямом переходе на эти маршруты открывается страница заказа.
+
+// Обратите внимание, что для хорошего UX стоило бы использовать лоадеры в те моменты,
+// когда мы отправили запрос и ждём ответ от сервера.
+// Поэтому не забудьте в экшен и редюсер добавить нужный функционал.

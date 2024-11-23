@@ -1,9 +1,8 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from '../../services/store';
-import { getUser } from '../../services/auth/slice';
+import { useDispatch, useSelector } from '../../services/store';
+import { getUser, patchUpdateUser } from '../../services/auth/slice';
 
 export const Profile: FC = () => {
   const user = useSelector(getUser);
@@ -29,8 +28,10 @@ export const Profile: FC = () => {
     formValue.email !== user?.email ||
     !!formValue.password;
 
+  //отправить отредактированные данные пользователя по сабмиту
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    dispatch(patchUpdateUser(formValue));
   };
 
   const handleCancel = (e: SyntheticEvent) => {

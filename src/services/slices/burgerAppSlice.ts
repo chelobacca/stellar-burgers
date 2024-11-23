@@ -2,7 +2,9 @@ import {
   getFeedsApi,
   getIngredientsApi,
   getOrdersApi,
-  orderBurgerApi
+  orderBurgerApi,
+  TRegisterData,
+  updateUserApi
 } from '@api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {

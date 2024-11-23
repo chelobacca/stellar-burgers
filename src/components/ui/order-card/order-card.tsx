@@ -18,6 +18,8 @@ export const OrderCardUI: FC<OrderCardUIProps> = memo(
 
     const onClick = () => {
       dispatch(openModal());
+      console.log(12345);
+      console.log(orderInfo);
     };
 
     return (

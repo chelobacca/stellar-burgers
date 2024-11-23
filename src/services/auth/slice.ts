@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { login, logout, setUser } from './actions';
+import { TRegisterData, updateUserApi } from '@api';
 
 type TUserState = {
   user: TUser | null;
@@ -35,9 +36,29 @@ export const authSlice = createSlice({
       })
       .addCase(setUser, (state, action) => {
         state.user = action.payload;
+      })
+
+      //обновить данные пользователя
+      .addCase(patchUpdateUser.pending, (state) => {
+        // state.loading = true;
+      })
+      .addCase(patchUpdateUser.rejected, (state) => {
+        // state.loading = false;
+      })
+      .addCase(patchUpdateUser.fulfilled, (state, action) => {
+        // state.loading = false;
+        if (action.payload.success && state.user !== null) {
+          state.user.name = action.payload.user.name;
+          state.user.email = action.payload.user.email;
+        }
       });
   }
 });
+
+export const patchUpdateUser = createAsyncThunk(
+  'user/update',
+  async (user: Partial<TRegisterData>) => updateUserApi(user)
+);
 
 export const { setIsAuthChecked } = authSlice.actions;
 export const { getIsAuthChecked, getUser } = authSlice.selectors;
