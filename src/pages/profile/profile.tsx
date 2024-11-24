@@ -2,11 +2,14 @@ import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from '../../services/store';
-import { getUser, patchUpdateUser } from '../../services/auth/slice';
+import { getUser } from '../../services/auth/slice';
+import { patchUpdateUser } from '../../services/auth/slice';
+import { Preloader } from '@ui';
+import { selectLoading } from '../../services/auth/slice';
 
 export const Profile: FC = () => {
   const user = useSelector(getUser);
-  const navigate = useNavigate();
+  const loading = useSelector(selectLoading);
   const dispatch = useDispatch();
 
   const [formValue, setFormValue] = useState(
@@ -50,6 +53,9 @@ export const Profile: FC = () => {
     }));
   };
 
+  if (loading) {
+    return <Preloader />;
+  }
   return (
     <ProfileUI
       formValue={formValue}

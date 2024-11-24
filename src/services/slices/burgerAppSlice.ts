@@ -99,6 +99,36 @@ export const burgerApp = createSlice({
         },
         ingredients: []
       };
+    },
+    removeIngredient(state, action: PayloadAction<string>) {
+      state.constructorItems.ingredients =
+        state.constructorItems.ingredients.filter(
+          (ingredient) => ingredient._id !== action.payload
+        );
+    },
+    moveUp(state, action: PayloadAction<{ index: number }>) {
+      const ingredients = state.constructorItems.ingredients;
+      const index = action.payload.index;
+
+      if (index > 0) {
+        // Проверяем, что элемент не первый
+        const newIngredients = [...ingredients]; // Копируем текущий массив
+        const [movedIngredient] = newIngredients.splice(index, 1); // Удаляем элемент из текущей позиции
+        newIngredients.splice(index - 1, 0, movedIngredient); // Вставляем его на одну позицию выше
+        state.constructorItems.ingredients = newIngredients; // Обновляем состояние
+      }
+    },
+    moveDown(state, action: PayloadAction<{ index: number }>) {
+      const ingredients = state.constructorItems.ingredients;
+      const index = action.payload.index;
+
+      if (index < ingredients.length - 1) {
+        // Проверяем, что элемент не последний
+        const newIngredients = [...ingredients]; // Копируем текущий массив
+        const [movedIngredient] = newIngredients.splice(index, 1); // Удаляем элемент из текущей позиции
+        newIngredients.splice(index + 1, 0, movedIngredient); // Вставляем его на одну позицию ниже
+        state.constructorItems.ingredients = newIngredients; // Обновляем состояние
+      }
     }
   },
   selectors: {
@@ -193,7 +223,14 @@ export const {
   getUserOrders
 } = burgerApp.selectors;
 
-export const { addIngredient, openModal, closeModal, clearOrderModalData } =
-  burgerApp.actions;
+export const {
+  addIngredient,
+  openModal,
+  closeModal,
+  clearOrderModalData,
+  removeIngredient,
+  moveUp,
+  moveDown
+} = burgerApp.actions;
 
 export default burgerApp.reducer;
