@@ -7,7 +7,6 @@ import {
   getFeedSelector
 } from '../../services/slices/burgerAppSlice';
 import store, { useDispatch, useSelector } from '../../services/store';
-import { getFeedsApi } from '@api';
 
 export const Feed: FC = () => {
   const dispatch = useDispatch();
@@ -25,7 +24,6 @@ export const Feed: FC = () => {
 
   const handleGetFeeds = () => {
     dispatch(fetchFeed());
-    // console.log(feed.orders);
   };
 
   return <FeedUI orders={feed.orders} handleGetFeeds={handleGetFeeds} />;

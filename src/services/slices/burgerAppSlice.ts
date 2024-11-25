@@ -12,8 +12,7 @@ import {
   TConstructorItems,
   TIngredient,
   TOrder,
-  TOrdersData,
-  TUser
+  TOrdersData
 } from '@utils-types';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -22,7 +21,6 @@ type TInitialState = {
   ingredients: TIngredient[];
   orderModalData: TOrder | null;
   orderRequest: boolean;
-  // user: TUser;
   userOrders: TOrder[] | null;
   isInit: boolean;
   isModalOpened: boolean;
@@ -36,10 +34,6 @@ export const initialState: TInitialState = {
   ingredients: [],
   orderModalData: null,
   orderRequest: false,
-  // user: {
-  //   name: '',
-  //   email: ''
-  // },
   userOrders: null,
   isInit: false,
   isModalOpened: false,

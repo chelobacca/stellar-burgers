@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
@@ -8,11 +8,12 @@ import {
   getIngredients,
   getUserOrders
 } from '../../services/slices/burgerAppSlice';
-import { redirect, useParams } from 'react-router-dom';
+import { redirect, useNavigate, useParams } from 'react-router-dom';
 /** TODO: взять переменные orderData и ingredients из стора */
 // TODO: брать заказ по номеру?
 
 export const OrderInfo: FC = () => {
+  const navigate = useNavigate();
   const params = useParams<{ number: string }>();
   if (!params.number) {
     redirect('/feed');
