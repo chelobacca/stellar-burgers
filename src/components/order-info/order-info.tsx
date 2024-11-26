@@ -13,10 +13,13 @@ import { redirect, useNavigate, useParams } from 'react-router-dom';
 // TODO: брать заказ по номеру?
 
 export const OrderInfo: FC = () => {
+  const { number } = useParams<{ number: string }>();
+
   const navigate = useNavigate();
   const params = useParams<{ number: string }>();
+
   if (!params.number) {
-    redirect('/feed');
+    navigate('/feed');
     return null;
   }
 

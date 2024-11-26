@@ -16,7 +16,6 @@ export const Login: FC = () => {
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(from.pathname);
 
     try {
       await dispatch(login({ email, password })).unwrap();

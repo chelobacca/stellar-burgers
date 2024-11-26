@@ -20,7 +20,6 @@ export const OrderStatus: FC<OrderStatusProps> = ({ status }) => {
     default:
       textStyle = '#F2F2F3';
   }
-  console.log(textStyle);
 
   return <OrderStatusUI textStyle={textStyle} text={statusText[status]} />;
 };
