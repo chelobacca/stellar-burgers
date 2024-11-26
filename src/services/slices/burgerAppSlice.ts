@@ -1,6 +1,7 @@
 import {
   getFeedsApi,
   getIngredientsApi,
+  getOrderByNumberApi,
   getOrdersApi,
   orderBurgerApi,
   TRegisterData,
@@ -14,6 +15,7 @@ import {
   TOrder,
   TOrdersData
 } from '@utils-types';
+import { log } from 'console';
 import { v4 as uuidv4 } from 'uuid';
 
 type TInitialState = {
@@ -51,17 +53,6 @@ export const initialState: TInitialState = {
   }
 };
 
-//type TConstructorIngredient = TIngredient & { key: string};
-
-// addIngredient: {
-//     reducer: (state, action: PayloadAction<TConstructorIngredient>) => {
-//         state.ingredients.push(action.payload);
-//     },
-//     prepare: (ingredient: TIngredient) => {
-//         return { payload: {...ingredient, key: nanoid()}}
-//     }
-// }
-
 export const burgerApp = createSlice({
   name: 'burgerApp',
   initialState,
@@ -87,6 +78,8 @@ export const burgerApp = createSlice({
     },
     clearOrderModalData(state) {
       state.orderModalData = null;
+    },
+    clearConstructorItems(state) {
       state.constructorItems = {
         bun: {
           price: 0
@@ -183,6 +176,18 @@ export const burgerApp = createSlice({
       .addCase(fetchUserOrders.fulfilled, (state, action) => {
         state.loading = false;
         state.userOrders = action.payload;
+      })
+
+      //получить заказ по номеру
+      .addCase(fetchOrder.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchOrder.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orderModalData = action.payload;
+      })
+      .addCase(fetchOrder.rejected, (state) => {
+        state.loading = false;
       });
   }
 });
@@ -206,6 +211,18 @@ export const fetchUserOrders = createAsyncThunk('user/orders', async () =>
   getOrdersApi()
 );
 
+export const fetchOrder = createAsyncThunk<TOrder, number>(
+  'orders/fetchOrder',
+  async (data, { rejectWithValue }) => {
+    const response = await getOrderByNumberApi(data);
+
+    if (!response?.success) {
+      return rejectWithValue(response);
+    }
+    return response.orders[0];
+  }
+);
+
 export const {
   selectLoading,
   getIngredients,
@@ -222,6 +239,7 @@ export const {
   openModal,
   closeModal,
   clearOrderModalData,
+  clearConstructorItems,
   removeIngredient,
   moveUp,
   moveDown

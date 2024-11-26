@@ -2,34 +2,23 @@ import { FC, useEffect, useMemo } from 'react';
 import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
-import { useSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import {
-  getFeedSelector,
+  fetchOrder,
   getIngredients,
-  getUserOrders
+  selectOrderModalData
 } from '../../services/slices/burgerAppSlice';
-import { redirect, useNavigate, useParams } from 'react-router-dom';
-/** TODO: взять переменные orderData и ingredients из стора */
-// TODO: брать заказ по номеру?
+import { useParams } from 'react-router-dom';
 
 export const OrderInfo: FC = () => {
+  const dispatch = useDispatch();
   const { number } = useParams<{ number: string }>();
-
-  const navigate = useNavigate();
-  const params = useParams<{ number: string }>();
-
-  if (!params.number) {
-    navigate('/feed');
-    return null;
-  }
-
-  const feed = useSelector(getFeedSelector);
-  const orders = feed.orders;
   const ingredients: TIngredient[] = useSelector(getIngredients);
+  const orderData = useSelector(selectOrderModalData);
 
-  const orderData = orders.find(
-    (item) => item.number === parseInt(params.number!)
-  );
+  useEffect(() => {
+    dispatch(fetchOrder(Number(number)));
+  }, [dispatch]);
 
   /* Готовим данные для отображения */
   const orderInfo = useMemo(() => {
@@ -76,6 +65,7 @@ export const OrderInfo: FC = () => {
   if (!orderInfo) {
     return <Preloader />;
   }
+  console.log(orderInfo);
 
   return <OrderInfoUI orderInfo={orderInfo} />;
 };

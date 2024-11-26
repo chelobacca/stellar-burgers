@@ -8,7 +8,6 @@ import {
 import { authSlice } from './auth/slice';
 import { burgerApp } from './slices/burgerAppSlice';
 
-// const rootReducer = () => {}; // Заменить на импорт настоящего редьюсера
 export const rootReducer = combineSlices(authSlice, burgerApp);
 
 const store = configureStore({
@@ -17,9 +16,9 @@ const store = configureStore({
 });
 
 // получаем состояние хранилища при любых изменениях
-store.subscribe(() => {
-  console.log('Current state:', store.getState());
-});
+// store.subscribe(() => {
+//   console.log('Current state:', store.getState());
+// });
 
 export type RootState = ReturnType<typeof rootReducer>;
 

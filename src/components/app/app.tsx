@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from '../../services/store';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 import { useEffect } from 'react';
 import {
+  clearOrderModalData,
   closeModal,
   fetchIngredients,
   getIngredients,
@@ -41,6 +42,7 @@ const App = () => {
 
   const handleClose = () => {
     dispatch(closeModal());
+    dispatch(clearOrderModalData());
     navigate(-1);
   };
 
@@ -111,10 +113,6 @@ const App = () => {
 };
 
 export default App;
-
-// При клике по заказу открывается модальное окно с информацией о заказе и происходит переход
-// на маршрут /feed/:id или /profile/orders/:id — в зависимости от того, на какой странице пользователь кликнул по заказу.
-// При прямом переходе на эти маршруты открывается страница заказа.
 
 // Запросы к серверу вызываются из хука useEffect с корректно заданным массивом зависимостей
 // или при возникновении событий.
