@@ -29,7 +29,6 @@ const App = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  // const state = location.state; // Получаем состояние из location
   const backgroundLocation = location.state?.background;
   const ingredients = useSelector(getIngredients);
   const isModalOpened = useSelector(modalSelector);
@@ -113,12 +112,3 @@ const App = () => {
 };
 
 export default App;
-
-// Запросы к серверу вызываются из хука useEffect с корректно заданным массивом зависимостей
-// или при возникновении событий.
-
-// Запросы к серверу выполняемые только авторизированным пользователем
-// (оформление заказа, получение и обновление данных пользователя,
-// получение списка заказов пользователя) включает механику
-// обновления токена авторизации описанную в
-// функции fetchWithRefresh файла utils/burger-api.ts стартеркита.

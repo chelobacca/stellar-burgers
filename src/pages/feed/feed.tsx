@@ -4,21 +4,22 @@ import { TOrder, TOrdersData } from '@utils-types';
 import { FC, useEffect } from 'react';
 import {
   fetchFeed,
-  getFeedSelector
+  getFeedSelector,
+  selectLoading
 } from '../../services/slices/burgerAppSlice';
-import store, { useDispatch, useSelector } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 
 export const Feed: FC = () => {
   const dispatch = useDispatch();
 
   const feed: TOrdersData = useSelector(getFeedSelector);
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
     dispatch(fetchFeed());
   }, [dispatch]);
 
-  /** TODO: переделать прелоудер */
-  if (!feed.orders.length) {
+  if (loading) {
     return <Preloader />;
   }
 

@@ -3,9 +3,7 @@ import {
   getIngredientsApi,
   getOrderByNumberApi,
   getOrdersApi,
-  orderBurgerApi,
-  TRegisterData,
-  updateUserApi
+  orderBurgerApi
 } from '@api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {

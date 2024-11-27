@@ -7,16 +7,16 @@ import { getIngredients } from '../../services/slices/burgerAppSlice';
 
 export const IngredientDetails: FC = () => {
   const navigate = useNavigate();
-  const params = useParams<{ id: string }>();
-  /** TODO: взять переменную из стора */
+  const { id } = useParams<{ id: string }>();
+
   useEffect(() => {
-    if (!params.id) {
+    if (!id) {
       navigate('/', { replace: true });
     }
-  }, []);
+  }, [id, navigate]);
 
   const ingredients = useSelector(getIngredients);
-  const ingredientData = ingredients.find((item) => item._id === params.id);
+  const ingredientData = ingredients.find((item) => item._id === id);
 
   if (!ingredientData) {
     return <Preloader />;
