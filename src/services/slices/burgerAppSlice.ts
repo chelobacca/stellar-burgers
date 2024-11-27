@@ -26,7 +26,7 @@ type TInitialState = {
   isModalOpened: boolean;
   errorText: string;
   constructorItems: TConstructorItems;
-  feed: TOrdersData; ///
+  feed: TOrdersData;
 };
 
 export const initialState: TInitialState = {
