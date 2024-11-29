@@ -1,7 +1,6 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
-import { useSelector } from 'react-redux';
 import {
   selectConstructorItems,
   selectOrderModalData,
@@ -10,7 +9,7 @@ import {
   clearOrderModalData,
   clearConstructorItems
 } from '../../services/slices/burgerAppSlice';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
 import { getIsAuthChecked } from '../../services/auth/slice';
 

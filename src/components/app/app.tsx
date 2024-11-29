@@ -24,6 +24,8 @@ import {
   getIngredients,
   modalSelector
 } from '../../services/slices/burgerAppSlice';
+import { getIsAuthChecked } from '../../services/auth/slice';
+import { checkUserAuth } from '../../services/auth/actions';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,11 @@ const App = () => {
   const backgroundLocation = location.state?.background;
   const ingredients = useSelector(getIngredients);
   const isModalOpened = useSelector(modalSelector);
+  const isAuthenticated = useSelector(getIsAuthChecked);
+
+  useEffect(() => {
+    dispatch(checkUserAuth());
+  }, []);
 
   useEffect(() => {
     if (!ingredients.length) {

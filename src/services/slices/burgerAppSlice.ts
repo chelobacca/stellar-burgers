@@ -88,7 +88,7 @@ export const burgerApp = createSlice({
     removeIngredient(state, action: PayloadAction<string>) {
       state.constructorItems.ingredients =
         state.constructorItems.ingredients.filter(
-          (ingredient) => ingredient._id !== action.payload
+          (ingredient) => ingredient.id !== action.payload
         );
     },
     moveUp(state, action: PayloadAction<{ index: number }>) {
@@ -193,21 +193,17 @@ export const burgerApp = createSlice({
 //THUNKS
 export const fetchIngredients = createAsyncThunk(
   'ingredients/getAll',
-  async () => getIngredientsApi()
+  getIngredientsApi
 );
 
-export const fetchFeed = createAsyncThunk<TOrdersData>('feed/fetch', async () =>
-  getFeedsApi()
+export const fetchFeed = createAsyncThunk<TOrdersData>(
+  'feed/fetch',
+  getFeedsApi
 );
 
-export const postNewOrder = createAsyncThunk(
-  'orders/newOrder',
-  async (data: string[]) => orderBurgerApi(data)
-);
+export const fetchUserOrders = createAsyncThunk('user/orders', getOrdersApi);
 
-export const fetchUserOrders = createAsyncThunk('user/orders', async () =>
-  getOrdersApi()
-);
+export const postNewOrder = createAsyncThunk('orders/newOrder', orderBurgerApi);
 
 export const fetchOrder = createAsyncThunk<TOrder, number>(
   'orders/fetchOrder',
