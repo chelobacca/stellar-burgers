@@ -11,7 +11,7 @@ import {
 } from '../../services/slices/burgerAppSlice';
 import { useDispatch, useSelector } from '../../services/store';
 import { useNavigate } from 'react-router-dom';
-import { getIsAuthChecked } from '../../services/auth/slice';
+import { getIsAuthChecked, getUser } from '../../services/auth/slice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
@@ -21,10 +21,11 @@ export const BurgerConstructor: FC = () => {
   const isAuthChecked = useSelector(getIsAuthChecked);
   const orderRequest = useSelector(orderRequestSelector);
   const orderModalData = useSelector(selectOrderModalData);
+  const user = useSelector(getUser);
 
   // оформть заказ
   const onOrderClick = () => {
-    if (!isAuthChecked) {
+    if (!user) {
       return navigate('/login', { replace: true });
     }
     const { bun, ingredients } = constructorItems;

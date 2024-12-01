@@ -25,6 +25,6 @@ export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
 export default store;
 
 // получаем состояние хранилища при любых изменениях
-// store.subscribe(() => {
-//   console.log('Current state:', store.getState());
-// });
+store.subscribe(() => {
+  console.log('Current state:', store.getState());
+});

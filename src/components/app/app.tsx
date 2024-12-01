@@ -36,9 +36,9 @@ const App = () => {
   const isModalOpened = useSelector(modalSelector);
   const isAuthenticated = useSelector(getIsAuthChecked);
 
-  useEffect(() => {
-    dispatch(checkUserAuth());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(checkUserAuth());
+  // }, []);
 
   useEffect(() => {
     if (!ingredients.length) {
