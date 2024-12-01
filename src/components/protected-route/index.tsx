@@ -1,7 +1,12 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { getIsAuthChecked, getUser } from '../../services/auth/slice';
+import {
+  getIsAuthChecked,
+  getUser,
+  selectLoading
+} from '../../services/auth/slice';
 import { useSelector } from '../../services/store';
+import { Preloader } from '@ui';
 
 type TProtectedProps = {
   onlyUnAuth?: boolean;
@@ -15,6 +20,10 @@ const Protected = ({
   const isAuthChecked = useSelector(getIsAuthChecked);
   const user = useSelector(getUser);
   const location = useLocation();
+
+  if (!isAuthChecked) {
+    return <Preloader />;
+  }
 
   if (!onlyUnAuth && !user) {
     // Маршрут для авторизованного и не авторизован

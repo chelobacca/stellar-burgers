@@ -14,7 +14,7 @@ import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from '../../services/store';
+import store, { useDispatch, useSelector } from '../../services/store';
 import { OnlyAuth, OnlyUnAuth } from '../protected-route';
 import { useEffect } from 'react';
 import {
@@ -24,7 +24,7 @@ import {
   getIngredients,
   modalSelector
 } from '../../services/slices/burgerAppSlice';
-import { getIsAuthChecked } from '../../services/auth/slice';
+import { getIsAuthChecked, getUser } from '../../services/auth/slice';
 import { checkUserAuth } from '../../services/auth/actions';
 
 const App = () => {
@@ -34,11 +34,11 @@ const App = () => {
   const backgroundLocation = location.state?.background;
   const ingredients = useSelector(getIngredients);
   const isModalOpened = useSelector(modalSelector);
-  const isAuthenticated = useSelector(getIsAuthChecked);
 
-  // useEffect(() => {
-  //   dispatch(checkUserAuth());
-  // }, []);
+  useEffect(() => {
+    console.log('accessToken:', localStorage.getItem('accessToken'));
+    dispatch(checkUserAuth());
+  }, []);
 
   useEffect(() => {
     if (!ingredients.length) {

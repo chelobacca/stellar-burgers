@@ -32,7 +32,6 @@ export const authSlice = createSlice({
     builder
       .addCase(login.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isAuthChecked = true;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;

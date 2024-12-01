@@ -22,6 +22,7 @@ export const login = createAsyncThunk<TUser, TLoginData>(
 
     const { user, refreshToken, accessToken } = response;
     setCookie('accessToken', accessToken);
+    localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
     return user;
   }

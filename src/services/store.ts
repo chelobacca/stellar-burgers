@@ -26,5 +26,7 @@ export default store;
 
 // получаем состояние хранилища при любых изменениях
 store.subscribe(() => {
-  console.log('Current state:', store.getState());
+  // console.log('Current state:', store.getState());
+  // console.log('user:', store.getState().auth.user?.name);
+  // console.log('isAuthChecked:', store.getState().auth.isAuthChecked);
 });
