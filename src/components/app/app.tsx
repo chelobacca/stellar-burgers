@@ -24,7 +24,6 @@ import {
   getIngredients,
   modalSelector
 } from '../../services/slices/burgerAppSlice';
-import { getIsAuthChecked, getUser } from '../../services/auth/slice';
 import { checkUserAuth } from '../../services/auth/actions';
 
 const App = () => {
@@ -36,7 +35,6 @@ const App = () => {
   const isModalOpened = useSelector(modalSelector);
 
   useEffect(() => {
-    console.log('accessToken:', localStorage.getItem('accessToken'));
     dispatch(checkUserAuth());
   }, []);
 

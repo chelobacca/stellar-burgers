@@ -7,10 +7,11 @@ import {
   getUserOrders
 } from '../../services/slices/burgerAppSlice';
 import { Preloader } from '@ui';
+import { getIsAuthChecked } from '../../services/auth/slice';
 
 export const ProfileOrders: FC = () => {
   const dispatch = useDispatch();
-
+  const isAuthChecked = useSelector(getIsAuthChecked);
   const orders: TOrder[] | null = useSelector(getUserOrders);
   useEffect(() => {
     dispatch(fetchUserOrders());
