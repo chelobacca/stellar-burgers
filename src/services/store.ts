@@ -1,12 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineSlices, configureStore } from '@reduxjs/toolkit';
 
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
   useSelector as selectorHook
 } from 'react-redux';
+import { authSlice } from './auth/slice';
+import { burgerApp } from './slices/burgerAppSlice';
 
-const rootReducer = () => {}; // Заменить на импорт настоящего редьюсера
+export const rootReducer = combineSlices(authSlice, burgerApp);
 
 const store = configureStore({
   reducer: rootReducer,
@@ -21,3 +23,10 @@ export const useDispatch: () => AppDispatch = () => dispatchHook();
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;
 
 export default store;
+
+// получаем состояние хранилища при любых изменениях
+// store.subscribe(() => {
+//   // console.log('Current state:', store.getState());
+//   // console.log('user:', store.getState().auth.user?.name);
+//   // console.log('isAuthChecked:', store.getState().auth.isAuthChecked);
+// });

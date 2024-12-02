@@ -61,6 +61,7 @@ export const ProfileUI: FC<ProfileUIProps> = ({
             errorText={''}
             size={'default'}
             icon={'EditIcon'}
+            autoComplete='new-password' // Альтернативное значение для отключения автозаполнения
           />
         </div>
         {isFormChanged && (

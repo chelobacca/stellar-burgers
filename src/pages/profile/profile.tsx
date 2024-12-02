@@ -1,18 +1,22 @@
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../services/store';
+import { getUser } from '../../services/auth/slice';
+import { patchUpdateUser } from '../../services/auth/slice';
+import { Preloader } from '@ui';
+import { selectLoading } from '../../services/auth/slice';
 
 export const Profile: FC = () => {
-  /** TODO: взять переменную из стора */
-  const user = {
-    name: '',
-    email: ''
-  };
+  const user = useSelector(getUser);
+  const loading = useSelector(selectLoading);
+  const dispatch = useDispatch();
 
-  const [formValue, setFormValue] = useState({
-    name: user.name,
-    email: user.email,
-    password: ''
-  });
+  const [formValue, setFormValue] = useState(
+    user
+      ? { name: user.name, email: user.email, password: '' }
+      : { name: '', email: '', password: '' }
+  );
 
   useEffect(() => {
     setFormValue((prevState) => ({
@@ -27,17 +31,19 @@ export const Profile: FC = () => {
     formValue.email !== user?.email ||
     !!formValue.password;
 
+  //отправить отредактированные данные пользователя по сабмиту
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
+    dispatch(patchUpdateUser(formValue));
   };
 
   const handleCancel = (e: SyntheticEvent) => {
     e.preventDefault();
-    setFormValue({
-      name: user.name,
-      email: user.email,
-      password: ''
-    });
+    setFormValue(
+      user
+        ? { name: user.name, email: user.email, password: '' }
+        : { name: '', email: '', password: '' }
+    );
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +53,9 @@ export const Profile: FC = () => {
     }));
   };
 
+  if (loading) {
+    return <Preloader />;
+  }
   return (
     <ProfileUI
       formValue={formValue}
@@ -56,6 +65,4 @@ export const Profile: FC = () => {
       handleInputChange={handleInputChange}
     />
   );
-
-  return null;
 };
