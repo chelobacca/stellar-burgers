@@ -84,7 +84,7 @@ const App = () => {
       </Routes>
 
       {/* МОДАЛЬНЫЕ ОКНА */}
-      {isModalOpened && backgroundLocation && (
+      {backgroundLocation && (
         <Routes>
           <Route
             path='/ingredients/:id'
