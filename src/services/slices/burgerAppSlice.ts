@@ -4,7 +4,7 @@ import {
   getOrderByNumberApi,
   getOrdersApi,
   orderBurgerApi
-} from '@api';
+} from '../../utils/burger-api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   TConstructorIngredient,
