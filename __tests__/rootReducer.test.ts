@@ -6,7 +6,7 @@ describe('rootReducer', () => {
   it('вызов rootReducer с undefined состоянием и экшеном UNKNOWN_ACTION возвращает корректное начальное состояние хранилища.', () => {
     const initialState = {
       auth: authSlice.getInitialState(),
-      burgerApp: burgerApp.getInitialState(),
+      burger: burgerApp.getInitialState(),
     };
 
     const newState = rootReducer(undefined, { type: 'UNKNOWN_ACTION' });

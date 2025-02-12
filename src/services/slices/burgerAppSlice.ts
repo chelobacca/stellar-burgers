@@ -52,7 +52,7 @@ export const initialState: TInitialState = {
 };
 
 export const burgerApp = createSlice({
-  name: 'burgerApp',
+  name: 'burger',
   initialState,
   reducers: {
     addIngredient: {
