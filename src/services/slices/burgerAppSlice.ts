@@ -16,7 +16,7 @@ import {
 import { log } from 'console';
 import { v4 as uuidv4 } from 'uuid';
 
-type TInitialState = {
+export type TInitialState = {
   loading: boolean;
   ingredients: TIngredient[];
   orderModalData: TOrder | null;
