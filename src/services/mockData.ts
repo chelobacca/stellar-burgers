@@ -209,7 +209,9 @@ export const mockIngredient = {
   calories: 4242,
   price: 424,
   image: 'https://code.s3.yandex.net/react/code/meat-01.png',
-  image_mobile: 'https://code.s3.yandex.net/react/code/meat-01-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react/code/meat-01-large.png',
-  uniqueId: 'test_id_1'
+  image_mobile:
+    'https://code.s3.yandex.net/react/code/meat-01-mobile.png',
+  image_large:
+    'https://code.s3.yandex.net/react/code/meat-01-large.png',
+  id: 'test_id_1'
 };
