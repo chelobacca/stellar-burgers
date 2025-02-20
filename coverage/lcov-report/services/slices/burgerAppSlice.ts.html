@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.09% </span>
+                <span class="strong">80.16% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>189/242</span>
+                <span class='fraction'>194/242</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>15/16</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">83.33% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>15/18</span>
+                <span class='fraction'>16/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.09% </span>
+                <span class="strong">80.16% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>189/242</span>
+                <span class='fraction'>194/242</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -364,18 +364,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -393,10 +393,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -606,8 +606,8 @@ export const burgerApp = createSlice({
   reducers: {
     addIngredient: {
       reducer: (state, action: PayloadAction&lt;TConstructorIngredient&gt;) =&gt; {
-        if (action.payload.type === 'bun') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
-<span class="cstat-no" title="statement not covered" >          state.constructorItems.bun = action.payload;</span>
+        if (action.payload.type === 'bun') {
+          state.constructorItems.bun = action.payload;
         } else {
           state.constructorItems.ingredients.push(action.payload);
         }
@@ -634,11 +634,11 @@ export const burgerApp = createSlice({
         ingredients: []
       };
     },
-    removeIngredient<span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;string&gt;) {</span>
-<span class="cstat-no" title="statement not covered" >      state.constructorItems.ingredients =</span>
-<span class="cstat-no" title="statement not covered" >        state.constructorItems.ingredients.filter(</span>
-<span class="cstat-no" title="statement not covered" >          (ingredient) =&gt; ingredient.id !== action.payload</span>
-<span class="cstat-no" title="statement not covered" >        );</span>
+    removeIngredient(state, action: PayloadAction&lt;string&gt;) {
+      state.constructorItems.ingredients =
+        state.constructorItems.ingredients.filter(
+          (ingredient) =&gt; ingredient.id !== action.payload
+        );
     },
     moveUp<span class="fstat-no" title="function not covered" >(state, action: PayloadAction&lt;{ index: number }&gt;) {</span>
 <span class="cstat-no" title="statement not covered" >      const ingredients = state.constructorItems.ingredients;</span>
@@ -796,7 +796,7 @@ export default burgerApp.reducer;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-02-18T18:38:50.379Z
+                at 2025-02-20T17:50:27.428Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
