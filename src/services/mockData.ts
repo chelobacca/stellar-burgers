@@ -215,3 +215,18 @@ export const mockIngredient = {
     'https://code.s3.yandex.net/react/code/meat-01-large.png',
   id: 'test_id_1'
 };
+
+export const orderMockData = 
+  {
+    ingredients: [
+      '643d69a5c3f7b9001cfa093d',
+      '643d69a5c3f7b9001cfa0941',
+      '643d69a5c3f7b9001cfa093d'
+    ],
+    _id: '6622337897ede0001d0666b5',
+    status: 'done',
+    name: 'testName',
+    createdAt: '2024-04-19T09:03:52.748Z',
+    updatedAt: '2024-04-19T09:03:58.057Z',
+    number: 123
+  };

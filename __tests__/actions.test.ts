@@ -7,6 +7,8 @@ import {
   clearConstructorItems,
   clearOrderModalData,
   closeModal,
+  moveDown,
+  moveUp,
   openModal,
   removeIngredient
 } from '../src/services/slices/burgerAppSlice';
@@ -72,37 +74,24 @@ describe('Синхронные экшены', () => {
     store.dispatch(removeIngredient(mockIngredient.id));
     const state = store.getState() as RootState; // Явно указываем тип
     expect(state.burger.constructorItems.ingredients).toHaveLength(2);
-    expect(state.burger.constructorItems.ingredients).not.toContainEqual({ id: 'test_id_1' });
-  });
-
-
-
-  describe('moveUp', () => {
-    it('should move ingredient up in the array', () => {
-      const state = store.getState() as RootState; // Явно указываем тип
-
-
-      const newState = reducer(initialState, moveUp({ index: 1 })); // Мясо (id: '2') должно переместиться вверх
-      expect(newState.constructorItems.ingredients[0].id).toBe('2'); // Теперь на первом месте должно быть мясо
-      expect(newState.constructorItems.ingredients[1].id).toBe('1'); // На втором месте должна остаться булка
-    });
-
-    it('should not change state if ingredient is already at the top', () => {
-      const newState = reducer(initialState, moveUp({ index: 0 }));
-      expect(newState).toEqual(initialState); // Состояние должно остаться прежним
+    expect(state.burger.constructorItems.ingredients).not.toContainEqual({
+      id: 'test_id_1'
     });
   });
 
+  it('должен перемещать ингредиент вверх', () => {
+    store.dispatch(moveUp({ index: 1 }));
+    const state = store.getState() as RootState; // Явно указываем тип
+    expect(state.burger.constructorItems.ingredients[0].id).toBe('test_id_2');
+    expect(state.burger.constructorItems.ingredients[1].id).toBe('test_id_1');
+  });
 
-
-
-
-
-  //
-  //
-  //
-  //
-  //
-  //
-  //
+  it('должен перемещать ингредиент вниз', () => {
+    store.dispatch(moveDown({ index: 0 }));
+    const state = store.getState() as RootState; // Явно указываем тип
+    expect(state.burger.constructorItems.ingredients[0].id).toBe('test_id_2');
+    expect(state.burger.constructorItems.ingredients[1].id).toBe('test_id_1');
+  });
+  
 });
+
