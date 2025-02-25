@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1740341945011" clover="3.2.0">
-  <project timestamp="1740341945011" name="All files">
-    <metrics statements="910" coveredstatements="664" conditionals="30" coveredconditionals="30" methods="42" coveredmethods="21" elements="982" coveredelements="715" complexity="0" loc="910" ncloc="910" packages="4" files="7" classes="7"/>
+<coverage generated="1740512385655" clover="3.2.0">
+  <project timestamp="1740512385655" name="All files">
+    <metrics statements="910" coveredstatements="676" conditionals="39" coveredconditionals="39" methods="42" coveredmethods="21" elements="991" coveredelements="736" complexity="0" loc="910" ncloc="910" packages="4" files="7" classes="7"/>
     <package name="services">
       <metrics statements="267" coveredstatements="267" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="mockData.ts" path="C:\Users\billy\Desktop\dev\stellar-burgers\src\services\mockData.ts">
@@ -407,9 +407,9 @@
       </file>
     </package>
     <package name="services.slices">
-      <metrics statements="242" coveredstatements="223" conditionals="27" coveredconditionals="27" methods="18" coveredmethods="18"/>
+      <metrics statements="242" coveredstatements="235" conditionals="36" coveredconditionals="36" methods="18" coveredmethods="18"/>
       <file name="burgerAppSlice.ts" path="C:\Users\billy\Desktop\dev\stellar-burgers\src\services\slices\burgerAppSlice.ts">
-        <metrics statements="242" coveredstatements="223" conditionals="27" coveredconditionals="27" methods="18" coveredmethods="18"/>
+        <metrics statements="242" coveredstatements="235" conditionals="36" coveredconditionals="36" methods="18" coveredmethods="18"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -565,39 +565,39 @@
         <line num="153" count="4" type="stmt"/>
         <line num="154" count="4" type="stmt"/>
         <line num="155" count="4" type="stmt"/>
-        <line num="156" count="4" type="stmt"/>
-        <line num="157" count="0" type="stmt"/>
+        <line num="156" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="157" count="1" type="stmt"/>
         <line num="158" count="4" type="stmt"/>
-        <line num="159" count="4" type="stmt"/>
-        <line num="160" count="0" type="stmt"/>
+        <line num="159" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="160" count="1" type="stmt"/>
         <line num="161" count="4" type="stmt"/>
-        <line num="162" count="4" type="stmt"/>
-        <line num="163" count="0" type="stmt"/>
-        <line num="164" count="0" type="stmt"/>
+        <line num="162" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="163" count="1" type="stmt"/>
+        <line num="164" count="1" type="stmt"/>
         <line num="165" count="4" type="stmt"/>
         <line num="166" count="4" type="stmt"/>
         <line num="167" count="4" type="stmt"/>
-        <line num="168" count="4" type="stmt"/>
-        <line num="169" count="0" type="stmt"/>
+        <line num="168" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="169" count="1" type="stmt"/>
         <line num="170" count="4" type="stmt"/>
-        <line num="171" count="4" type="stmt"/>
-        <line num="172" count="0" type="stmt"/>
+        <line num="171" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="172" count="1" type="stmt"/>
         <line num="173" count="4" type="stmt"/>
-        <line num="174" count="4" type="stmt"/>
-        <line num="175" count="0" type="stmt"/>
-        <line num="176" count="0" type="stmt"/>
+        <line num="174" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="175" count="1" type="stmt"/>
+        <line num="176" count="1" type="stmt"/>
         <line num="177" count="4" type="stmt"/>
         <line num="178" count="4" type="stmt"/>
         <line num="179" count="4" type="stmt"/>
-        <line num="180" count="4" type="stmt"/>
-        <line num="181" count="0" type="stmt"/>
+        <line num="180" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="181" count="1" type="stmt"/>
         <line num="182" count="4" type="stmt"/>
-        <line num="183" count="4" type="stmt"/>
-        <line num="184" count="0" type="stmt"/>
-        <line num="185" count="0" type="stmt"/>
+        <line num="183" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="184" count="1" type="stmt"/>
+        <line num="185" count="1" type="stmt"/>
         <line num="186" count="4" type="stmt"/>
-        <line num="187" count="4" type="stmt"/>
-        <line num="188" count="0" type="stmt"/>
+        <line num="187" count="4" type="cond" truecount="1" falsecount="0"/>
+        <line num="188" count="1" type="stmt"/>
         <line num="189" count="4" type="stmt"/>
         <line num="190" count="4" type="stmt"/>
         <line num="191" count="1" type="stmt"/>
