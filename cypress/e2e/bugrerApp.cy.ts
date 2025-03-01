@@ -81,9 +81,9 @@ describe('тест оформления заказа', function () {
   cy.get('[data-cy=modal]').should('not.exist');
 
   //проверяем, что конструктор пуст
-  cy.get('[data-cy=constructor]').should('not.contain', 'Ингридиент 1');
-  cy.get('[data-cy=constructor]').should('not.contain', 'Ингридиент 2');
-  cy.get('[data-cy=constructor]').should('not.contain', 'Ингридиент 4');
+  cy.get('[data-cy=constructor]').contains('Ингридиент 1').should('not.exist');
+  cy.get('[data-cy=constructor]').contains('Ингридиент 2').should('not.exist');
+  cy.get('[data-cy=constructor]').contains('Ингридиент 4').should('not.exist');
  });
 });
 
