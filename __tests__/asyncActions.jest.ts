@@ -18,6 +18,7 @@ import {
 } from '../src/services/slices/burgerAppSlice';
 import { TOrder } from '../src/utils/types';
 import { getOrderByNumberApi } from '../src/utils/burger-api';
+import { patchUpdateUser } from '../src/services/auth/slice';
 
 describe('burgerAppSlice async actions', () => {
   let store: ReturnType<typeof configureStore>;
@@ -74,11 +75,11 @@ describe('burgerAppSlice async actions', () => {
           '643d69a5c3f7b9001cfa0941',
           '643d69a5c3f7b9001cfa093d'
         ],
-        _id: '6622337897ede0001d0666b5',
+        _id: '67c4365f133acd001be54ad3',
         status: 'done',
         name: 'testName',
-        createdAt: '2024-04-19T09:03:52.748Z',
-        updatedAt: '2024-04-19T09:03:58.057Z',
+        createdAt: '2025-03-02T10:43:43.639Z',
+        updatedAt: '2025-03-02T10:43:44.247Z',
         number: 123
       }
     };
@@ -116,7 +117,7 @@ describe('burgerAppSlice async actions', () => {
       totalToday: 10,
       orders: [
         {
-          _id: '664e927097ede0001d06bdb9',
+          _id: '67c4330a133acd001be54ac2',
           ingredients: [
             '643d69a5c3f7b9001cfa093d',
             '643d69a5c3f7b9001cfa093e',
@@ -124,9 +125,9 @@ describe('burgerAppSlice async actions', () => {
           ],
           status: 'done',
           name: 'Флюоресцентный люминесцентный бургер',
-          createdAt: '2024-05-23T00:48:48.039Z',
-          updatedAt: '2024-05-23T00:48:48.410Z',
-          number: 40680
+          createdAt: '2025-03-02T10:29:30.479Z',
+          updatedAt: '2025-03-02T10:29:31.325Z',
+          number: 69787
         }
       ]
     };
@@ -155,7 +156,7 @@ describe('burgerAppSlice async actions', () => {
   it('should handle fetchUserOrders.fulfilled', async () => {
     const mockResponse = [
       {
-        _id: '664e927097ede0001d06bdb9',
+        _id: '67c4330a133acd001be54ac2',
         ingredients: [
           '643d69a5c3f7b9001cfa093d',
           '643d69a5c3f7b9001cfa093e',
@@ -163,9 +164,9 @@ describe('burgerAppSlice async actions', () => {
         ],
         status: 'done',
         name: 'Флюоресцентный люминесцентный бургер',
-        createdAt: '2024-05-23T00:48:48.039Z',
-        updatedAt: '2024-05-23T00:48:48.410Z',
-        number: 40680
+        createdAt: '2024-12-23T00:48:48.039Z',
+        updatedAt: '2024-12-23T00:48:48.410Z',
+        number: 69787
       }
     ];
 
@@ -193,7 +194,7 @@ describe('burgerAppSlice async actions', () => {
 
   it('should handle fetchOrder.fulfilled', async () => {
     const mockResponse: TOrder = {
-      _id: '664e927097ede0001d06bdb9',
+      _id: '67c4330a133acd001be54ac2',
       ingredients: [
         '643d69a5c3f7b9001cfa093d',
         '643d69a5c3f7b9001cfa093e',
@@ -201,13 +202,13 @@ describe('burgerAppSlice async actions', () => {
       ],
       status: 'done',
       name: 'Флюоресцентный люминесцентный бургер',
-      createdAt: '2024-05-23T00:48:48.039Z',
-      updatedAt: '2024-05-23T00:48:48.410Z',
-      number: 40680
+      createdAt: '2025-03-02T10:29:30.479Z',
+      updatedAt: '2025-03-02T10:29:30.479Z',
+      number: 69787
     };
 
     await store.dispatch(
-      fetchOrder.fulfilled(mockResponse, 'fulfilled', 40680)
+      fetchOrder.fulfilled(mockResponse, 'fulfilled', 69787)
     );
     const state = store.getState() as RootState; // Явно указываем тип
     expect(state.burger.loading).toBe(false);
@@ -215,15 +216,57 @@ describe('burgerAppSlice async actions', () => {
   });
 
   it('should handle fetchOrder.rejected', () => {
-    const mockAnswer = { name: 'test', message: 'error' };
-    store.dispatch(fetchOrder.rejected(mockAnswer, 'rejected', 40680));
+    const mockResponse = { name: 'test', message: 'error' };
+    store.dispatch(fetchOrder.rejected(mockResponse, 'rejected', 69787));
     const state = store.getState() as RootState; // Явно указываем тип
     expect(state.burger.loading).toBe(false);
   });
 
+  // AUTH //
 
+  test('should handle login.fulfilled', () => {
+    const userMockData = { email: 'user@mail.ru', name: 'User' };
+    const loginMockData = { email: 'user@mail.ru',password: 'password' };
+    store.dispatch(login.fulfilled(userMockData, 'fulfilled', loginMockData));
+    const state = store.getState() as RootState; // Явно указываем тип
+    expect(state.auth.user).toEqual(userMockData);
+  });
+  
+  test('should handle logout.fulfilled', () => {
+    store.dispatch(logout.fulfilled({success: true}, 'fulfilled'));
+    const state = store.getState() as RootState; // Явно указываем тип
+    expect(state.auth.user).toEqual(null);
+  });
 
+  test('should handle setUser', () => {
+    const userMockData = { email: 'test@mail.ru', name: 'testName' };
+    store.dispatch(setUser(userMockData));
+    const state = store.getState() as RootState; // Явно указываем тип
+    expect(state.auth.user).toEqual(userMockData);
+  });
 
+  test('should handle patchUpdateUser.pending', () => {
+    const registerMockData = { email: 'test@mail.ru', name: 'testName', password: 'йцукен' };
+    store.dispatch(patchUpdateUser.pending('pending', registerMockData));
+    const state = store.getState() as RootState; // Явно указываем тип
+    expect(state.auth.loading).toBe(true);
+  });
+
+  test('should handle patchUpdateUser.rejected', () => {
+    const registerMockData = { email: 'test@mail.ru', name: 'testName', password: 'йцукен' };
+    const mockResponse = { name: 'test', message: 'error' };
+    store.dispatch(patchUpdateUser.rejected(mockResponse, 'rejected', registerMockData));
+    const state = store.getState() as RootState; // Явно указываем тип
+    expect(state.auth.loading).toBe(false);
+  });
+
+  test('should handle patchUpdateUser.fulfilled', () => {
+    const userResponseMockData = { success: true, user: {email: 'test@mail.ru', name: 'testName'} };
+    const registerMockData = { email: 'test@mail.ru', name: 'testName', password: 'йцукен' };
+    store.dispatch(patchUpdateUser.fulfilled(userResponseMockData, 'fulfilled', registerMockData));
+    const state = store.getState() as RootState; // Явно указываем тип
+    expect(state.auth.loading).toBe(false);
+  });
 
   
 });
