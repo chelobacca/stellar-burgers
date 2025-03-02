@@ -7,6 +7,8 @@ import {
 } from 'react-redux';
 import { authSlice } from './auth/slice';
 import { burgerApp } from './slices/burgerAppSlice';
+import { log } from 'console';
+import { mockStore } from './mockData';
 
 export const rootReducer = combineSlices(authSlice, burgerApp);
 
@@ -26,7 +28,15 @@ export default store;
 
 // получаем состояние хранилища при любых изменениях
 // store.subscribe(() => {
-//   // console.log('Current state:', store.getState());
-//   // console.log('user:', store.getState().auth.user?.name);
-//   // console.log('isAuthChecked:', store.getState().auth.isAuthChecked);
+// console.log('localStorage:', window.localStorage);
+// console.log('Current state:', store.getState());
+// console.log('user:', store.getState().auth.user?.name);
+// console.log('isAuthChecked:', store.getState().auth.isAuthChecked);
+// console.log('mock:', mockStore);
+//   console.log(
+//     JSON.stringify({ accessToken: localStorage.getItem('accessToken') })
+//   );
+//   console.log(
+//     JSON.stringify({ refreshToken: localStorage.getItem('refreshToken') })
+//   );
 // });

@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
 import { login, logout, setUser } from './actions';
-import { TRegisterData, updateUserApi } from '@api';
+import { TRegisterData, updateUserApi } from '../../utils/burger-api';
 
-type TUserState = {
+export type TUserState = {
   user: TUser | null;
   isAuthChecked: boolean;
   loading: boolean;

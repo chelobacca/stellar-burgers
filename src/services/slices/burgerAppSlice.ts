@@ -4,7 +4,7 @@ import {
   getOrderByNumberApi,
   getOrdersApi,
   orderBurgerApi
-} from '@api';
+} from '../../utils/burger-api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   TConstructorIngredient,
@@ -16,7 +16,7 @@ import {
 import { log } from 'console';
 import { v4 as uuidv4 } from 'uuid';
 
-type TInitialState = {
+export type TInitialState = {
   loading: boolean;
   ingredients: TIngredient[];
   orderModalData: TOrder | null;
@@ -52,7 +52,7 @@ export const initialState: TInitialState = {
 };
 
 export const burgerApp = createSlice({
-  name: 'burgerApp',
+  name: 'burger',
   initialState,
   reducers: {
     addIngredient: {
