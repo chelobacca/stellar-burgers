@@ -37,7 +37,7 @@ export const mockStore = {
       name: 'Флюоресцентный люминесцентный бургер',
       createdAt: '2024-05-23T01:09:06.622Z',
       updatedAt: '2024-05-23T01:09:06.967Z',
-      number: 40682,
+      number: 69791,
       ingredients: ['testid1', 'testid2'],
     },
 
@@ -56,10 +56,10 @@ export const mockStore = {
         name: 'Флюоресцентный люминесцентный бургер',
         createdAt: '2024-04-23T08:53:27.817Z',
         updatedAt: '2024-04-23T08:53:28.481Z',
-        number: 38671
+        number: 69790
       },
       {
-        _id: '664e927097ede0001d06bdb9',
+        _id: '67c4330a133acd001be54ac2',
         ingredients: [
           '643d69a5c3f7b9001cfa093d',
           '643d69a5c3f7b9001cfa093e',
@@ -67,9 +67,9 @@ export const mockStore = {
         ],
         status: 'done',
         name: 'Флюоресцентный люминесцентный бургер',
-        createdAt: '2024-05-23T00:48:48.039Z',
-        updatedAt: '2024-05-23T00:48:48.410Z',
-        number: 40680
+        createdAt: '2025-03-02T10:29:30.479Z',
+        updatedAt: '2025-03-02T10:29:31.325Z',
+        number: 69787
       }
     ],
 
@@ -146,7 +146,7 @@ export const mockStore = {
     feed: {
       orders: [
         {
-          _id: '664e927097ede0001d06bdb9',
+          _id: '67c4330a133acd001be54ac2',
           ingredients: [
             '643d69a5c3f7b9001cfa093d',
             '643d69a5c3f7b9001cfa093e',
@@ -154,9 +154,9 @@ export const mockStore = {
           ],
           status: 'done',
           name: 'Флюоресцентный люминесцентный бургер',
-          createdAt: '2024-05-23T00:48:48.039Z',
-          updatedAt: '2024-05-23T00:48:48.410Z',
-          number: 40680
+          createdAt: '2025-03-02T10:29:30.479Z',
+          updatedAt: '2025-03-02T10:29:31.325Z',
+          number: 69787
         },
         {
           _id: '664e85e497ede0001d06bda7',
@@ -167,9 +167,9 @@ export const mockStore = {
           ],
           status: 'done',
           name: 'Флюоресцентный люминесцентный бургер',
-          createdAt: '2024-05-22T23:55:16.472Z',
-          updatedAt: '2024-05-22T23:55:16.866Z',
-          number: 40679
+          createdAt: '2025-03-02T10:38:32.185Z',
+          updatedAt: '2025-03-02T10:38:34.211Z',
+          number: 69788
         }
       ],
       total: 1000,
@@ -223,10 +223,11 @@ export const orderMockData =
       '643d69a5c3f7b9001cfa0941',
       '643d69a5c3f7b9001cfa093d'
     ],
-    _id: '6622337897ede0001d0666b5',
+    _id: '67c4365f133acd001be54ad3',
     status: 'done',
     name: 'testName',
-    createdAt: '2024-04-19T09:03:52.748Z',
-    updatedAt: '2024-04-19T09:03:58.057Z',
+    createdAt: '2025-03-02T10:43:43.639Z',
+    updatedAt: '2025-03-02T10:43:44.247Z',
     number: 123
   };
+

@@ -69,6 +69,6 @@ describe('Test selectors', () => {
     const userOrders = getUserOrders(store.getState());
     expect(userOrders).toEqual(mockStore.burger.userOrders);
   });
-
+  
 });
 
